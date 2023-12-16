@@ -1,0 +1,64 @@
+php artisan make:migration create_users_table
+            $table->id();
+
+            $table->string("username")->unique()->nullable();
+            $table->string("email")->unique();
+            $table->string("password");
+
+            $table->timestamps();
+
+
+php artisan make:migration create_categories_table
+            $table->id();
+
+            $table->string("category_name")->unique();
+
+            $table->timestamps();
+
+
+php artisan make:migration create_brands_table
+            $table->id();
+
+            $table->string("brand_name")->unique();
+
+            $table->timestamps();
+
+php artisan make:migration create_products_table
+            $table->id();
+
+            $table->string("product_name");
+
+            $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('brand_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+
+            $table->timestamps();
+
+php artisan make:migration create_product_stocks_table
+            $table->id();
+
+            $table->string("batch_no");
+
+            $table->foreignId('product_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+
+            $table->string("stock_qty");
+
+            $table->string("unit_cost");
+            $table->string("unit_price");
+
+            $table->string("total_cost");
+            $table->string("total_price");
+
+            $table->timestamps();
+
+php artisan make:migration create_sales_table
+            $table->id();
+
+            $table->foreignId('product_stock_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+
+            $table->string("sale_qty");
+
+            $table->string("discount");
+
+            $table->string("total_sale_price");
+
+            $table->timestamps();
