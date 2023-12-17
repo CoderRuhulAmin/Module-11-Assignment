@@ -11,13 +11,19 @@
                 </div>
             </div>
 
-            <form action="dashboard.products.store" method="POST">
+            <form action="{{ route( 'dashboard.products.store' ) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body text-success">
                     <div class="row mb-3">
                         <div class="col-lg-12">
                             <label for="productName-field" class="form-label">Product Name*</label>
-                            <input type="text" name="product_name" id="productName-field" class="form-control" placeholder="Product name" >
+                            <input type="text" 
+                            name="product_name" 
+                            id="productName-field" 
+                            class="form-control" 
+                            placeholder="Product name" 
+                            value="{{ old('product_name') }}"
+                            >
                             @error('product_name')
                                 <p class="text-danger">
                                     {{ $message }}
@@ -42,7 +48,7 @@
                             </select>
                             @error('category_id')
                                 <p class="text-danger">
-                                    {{ $message }}
+                                    {{ "Please Select a Category Name. It's Required!" }}
                                 </p>
                             @enderror
                         </div>
@@ -64,7 +70,7 @@
                             </select>
                             @error('brand_id')
                                 <p class="text-danger">
-                                    {{ $message }}
+                                    {{ "Please Select a Brand Name. It's Required!" }}
                                 </p>
                             @enderror
                         </div>

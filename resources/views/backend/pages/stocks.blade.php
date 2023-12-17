@@ -1,17 +1,16 @@
 @extends('backend.layouts.app')
-
 @section('content')
 
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0">Products</h4>
+                                <h4 class="mb-sm-0">Stocks</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                        <li class="breadcrumb-item active">Products</li>
+                                        <li class="breadcrumb-item active">Stocks</li>
                                     </ol>
                                 </div>
 
@@ -25,10 +24,10 @@
                             <div class="card" id="tasksList">
                                 <div class="card-header border-0">
                                     <div class="d-flex align-items-center">
-                                        <h5 class="card-title mb-0 flex-grow-1">All Products</h5>
+                                        <h5 class="card-title mb-0 flex-grow-1">All Stocks</h5>
                                         <div class="flex-shrink-0">
                                            <div class="d-flex flex-wrap gap-2">
-                                                <a href="{{route('dashboard.products.create')}}"><button class="btn btn-soft-primary add-btn" data-bs-toggle="modal" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add New Product </button></a>
+                                                <a href="{{route('dashboard.stocks.create')}}"><button class="btn btn-soft-primary add-btn" data-bs-toggle="modal" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add New Stock </button></a>
                                             	<button class="btn btn-soft-secondary" id="remove-actions" onclick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
                                            </div>
                                         </div>
@@ -88,11 +87,17 @@
                                                     <th class="sort" data-sort="product_name">Product Name</th>
                                                     <th class="sort" data-sort="category_name">Category</th>
                                                     <th class="sort" data-sort="brand_name">Brand</th>
+                                                    <th class="sort" data-sort="brand_name">Batch No.</th>
+                                                    <th class="sort" data-sort="brand_name">Stock Qty</th>
+                                                    <th class="sort" data-sort="brand_name">Unit Cost</th>
+                                                    <th class="sort" data-sort="brand_name">Unit Price</th>
+                                                    <th class="sort" data-sort="brand_name">Total Cost</th>
+                                                    <th class="sort" data-sort="brand_name">Total Price</th>
                                                     <th class="sort" data-sort="action">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="list form-check-all">
-                                                @foreach($products as $product)
+                                                @foreach($stocks as $item)
                                                     <tr>
                                                         <th scope="row">
                                                             <div class="form-check">
@@ -100,9 +105,15 @@
                                                             </div>
                                                         </th>
                                                         <td class="id">{{ 1 }}</td>
-                                                        <td class="product_name">{{ $product->product_name }}</td>
-                                                        <td class="category_name">{{ $product->category_name }}</td>
-                                                        <td class="brand_name">{{ $product->brand_name }}</td>
+                                                        <td class="product_name">{{ $item->product_name }}</td>
+                                                        <td class="category_name">{{ $item->category_name }}</td>
+                                                        <td class="brand_name">{{ $item->brand_name }}</td>
+                                                        <td class="brand_name">{{ $item->batch_no }}</td>
+                                                        <td class="brand_name">{{ $item->stock_qty }}</td>
+                                                        <td class="brand_name">{{ $item->unit_cost }}</td>
+                                                        <td class="brand_name">{{ $item->unit_price }}</td>
+                                                        <td class="brand_name">{{ $item->total_cost }}</td>
+                                                        <td class="brand_name">{{ $item->total_price }}</td>
                                                         <td>
                                                             <div class="d-flex">
                                                                 <div class="flex-shrink-0 ms-4">
@@ -166,6 +177,5 @@
                         </div>
                     </div>
                     <!--end delete modal -->
-
 
 @endsection

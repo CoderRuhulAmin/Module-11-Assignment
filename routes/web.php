@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\StocksController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\DashboardController;
 
@@ -39,6 +40,14 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function(){
     Route::get('/products/edit/{id}', [ProductsController::class, 'edit'])->name('products.edit');
     Route::get('/products/update/{id}', [ProductsController::class, 'update'])->name('products.update');
     Route::get('/products/delete/{id}', [ProductsController::class, 'delete'])->name('products.delete');
+
+    Route::get('/stocks', [StocksController::class, 'index'])->name('stocks');
+    Route::get('/stocks/create', [StocksController::class, 'create'])->name('stocks.create');
+    Route::post('/stocks/create', [StocksController::class, 'store'])->name('stocks.store');
+    Route::get('/stocks/details/{id}', [StocksController::class, 'show'])->name('stocks.show');
+    Route::get('/stocks/edit/{id}', [StocksController::class, 'edit'])->name('stocks.edit');
+    Route::get('/stocks/update/{id}', [StocksController::class, 'update'])->name('stocks.update');
+    Route::get('/stocks/delete/{id}', [StocksController::class, 'delete'])->name('stocks.delete');
 
     Route::get('/sales', [SalesController::class, 'index'])->name('sales');
 

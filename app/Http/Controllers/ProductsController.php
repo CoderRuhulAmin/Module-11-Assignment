@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\DB;
 class ProductsController extends Controller
 {
     public function index(){
-        $products = DB::table('products')->get();
+        $products = DB::table('products')
+                    ->leftJoin('categories', 'products.category_id', '=', 'categories.id')
+                    ->leftJoin('brands', 'brands.id', '=', 'products.brand_id')
+                    ->get();
 
         return view('backend.pages.products', compact('products'));
     }
@@ -20,16 +23,22 @@ class ProductsController extends Controller
         return view('backend.pages.products-create', compact('categories', 'brands'));
     }
     public function store(Request $request){
-        dd($request->all);
 
         $this->validate($request, [
-            "product_name" => "required",
+            "product_name" => "required|unique:products",
             "category_id" => "required",
             "brand_id" => "required"
         ]);
 
 
+        // dd($request->all());
 
-        return redirect('backend.pages.products')->with("Success", "New Product Created Successfully.");
+        DB::table('products')->insert([
+            "product_name" => $request->product_name,
+            "category_id" => $request->category_id,
+            "brand_id" => $request->brand_id
+        ]);
+
+        return redirect()->route('dashboard.products')->with("Success", "New Product Created Successfully.");
     }
 }
